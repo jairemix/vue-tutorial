@@ -1,5 +1,5 @@
 {
-  "name": "tutorial",
+  "name": "vue-tutorial",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.118",
     "bootstrap-vue": "^2.0.0-rc.11",
     "css-loader": "^1.0.1",
+    "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-awesome": "^3.2.0",
     "vue-class-component": "^6.0.0",

@@ -1,9 +1,17 @@
 <template>
-  <div class="hello">
+  <div class="party-page">
     <h1>{{title}}</h1>
     <ul class="h-heroes">
-    <HeroRow v-for="hero in party" :hero="hero" :key="hero.heroID" />
+      <HeroRow v-for="hero in party" :hero="hero" :key="hero.heroID" @delete="deleteHero(hero)" />
     </ul>
+
+    <label>
+      <h4>Name</h4>
+      <input type="text" v-model="newHero.name" />
+    </label>
+
+    <button class="btn btn-large btn-block" @click="addHero()">Add</button>
+
   </div>
 </template>
 
@@ -11,6 +19,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import HeroRow from '../components/HeroRow.vue';
 import { IHero } from '../types/hero';
+import { filter } from 'lodash/fp'
 
 @Component({
   components: {
@@ -19,7 +28,7 @@ import { IHero } from '../types/hero';
 })
 export default class ChoosePartyPage extends Vue {
 
-  public party: IHero[] = [{
+  party: IHero[] = [{
     name: 'Luke',
     className: 'Light Mage',
     classIcon: '⭐️',
@@ -45,7 +54,38 @@ export default class ChoosePartyPage extends Vue {
     heroID: '4',
   }];
 
+  newHero: {
+    name: string
+  };
+
   @Prop() private title!: string;
+
+  constructor() {
+    super();
+    this.resetForm();
+  }
+  
+  deleteHero(hero: IHero) {
+    this.party = filter((h) => h !== hero, this.party);
+  }
+
+  addHero() {
+    const newHero = {
+      ...this.newHero,
+      className: 'Light Mage',
+      classIcon: '⭐️',
+      level: 1,
+      heroID: new Date() + ''
+    };
+    this.party = [...this.party, newHero];
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.newHero = {
+      name: ''
+    };
+  }
 
 }
 </script>

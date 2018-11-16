@@ -4,7 +4,7 @@
     <div class="h-hero__name">{{hero.name}}</div>
     <div class="h-hero__class">{{hero.className}}</div>
     <div class="h-hero__level">{{hero.level}}</div>
-    <button class="h-hero__delete">
+    <button class="h-hero__delete" v-on:click="onClickDelete()">
       <v-icon name="times"></v-icon>
     </button>
   </li>
@@ -17,6 +17,11 @@ import { IHero } from '../types/hero';
 @Component
 export default class HeroRow extends Vue {
   @Prop() private hero!: IHero;
+  onClickDelete() {
+    const confirmed = confirm('Are you sure you want to remove this party member?');
+    if (!confirmed) return;
+    this.$emit('delete', this.hero);
+  }
 }
 </script>
 
