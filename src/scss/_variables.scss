@@ -1,0 +1,17 @@
+$primary-color: #6abc65;
+$medium-grey-color: #999;
+$dark-color: #2c3e50;
+$assertive-color: #ce3c23;
+
+@mixin resetButton() {
+  border: none;
+  background: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+$breakpoint-xl: "all and (min-width: 1280px)";
+$breakpoint-lg: "all and (min-width: 980px)";
+$breakpoint-md: "all and (min-width: 720px)";
+$breakpoint-sm: "all and (min-width: 480px)";
